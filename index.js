@@ -1,9 +1,8 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
-const util = require("utils");
+const util = require("util");
 const inquirer = require("inquirer");
 const generateMarkdown = require("./utils/generateMarkdown");
-
 const writeFileAsync = util.promisify(fs.writeFile)
 
 // TODO: Create an array of questions for user input
@@ -30,7 +29,7 @@ inquirer.prompt([
     },
     {
         type: "list",
-        name: "license",
+        name: "projectLicense",
         message: "Choose the appropriate license for this project. For more information refer to https://choosealicense.com/",
         choices:[
             "agpl-3.0",
@@ -47,12 +46,14 @@ inquirer.prompt([
     {
         type: "input",
         name: "contributing",
-        message: "If applicable, how would you like other developers to contribute?"
+        message: "If applicable, how would you like other developers to contribute?",
+        default: ""
     },
     {
         type: "input",
         name: "test",
-        message: "Does your project have any tests? If so, provide examples on how to run them"
+        message: "Does your project have any tests? If so, provide examples on how to run them",
+        default: ""
     },
     {
         type: "input",
@@ -64,7 +65,6 @@ inquirer.prompt([
         name: "email",
         message:"What is your email?"
     }
-
 ])
 // TODO: Create a function to write README fileß
 function writeToFile(fileName, data) {
